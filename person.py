@@ -38,7 +38,7 @@ class Person:
         self.extr_to_intr = extr_to_intr
     
 
-    def speak(self, group):
+    def speak(self, group: str):
         """
         Outputs dialogue for the Person, based on 
         the Person's group, passed as an argument.
@@ -51,8 +51,9 @@ class Person:
 
         if group_dialogue_chance <= 50:
             dialogue_choices = Person.DIALOGUE_OPTIONS.get(group.upper())
-            random_group_dialogue = random.choice(dialogue_choices)
-            print(random_group_dialogue)
+            if dialogue_choices:
+                random_group_dialogue = random.choice(dialogue_choices)
+                print(random_group_dialogue)
         else:
             print(rand_dialogue_choice)
             

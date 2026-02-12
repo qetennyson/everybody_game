@@ -1,3 +1,5 @@
+"""Dialogue lines for different personality and age groups."""
+
 INTROVERT_DIALOGUE = ["Football season's been pretty good right?", "Hey kid", 
 "Why are we here?", "I was doing fine in my room at home, but nope!",
     
@@ -17,7 +19,7 @@ your lives nowadays"""
 ]
 
 YOUNGER_DIALOGUE = ["Hi I just got this new game, wanna play?", """We're playing 
-hide and seek. Can you be the seeker?""" """Hey! I'm almost as tall as you!""",
+hide and seek. Can you be the seeker?""", """Hey! I'm almost as tall as you!""",
 
     
 ]

@@ -1,11 +1,15 @@
+"""People and dialogue behavior for the game."""
+
 import random
-from dialogue import OLDER_DIALOGUE, YOUNGER_DIALOGUE, \
-EXTROVERT_DIALOGUE, INTROVERT_DIALOGUE
+from dialogue import (
+    OLDER_DIALOGUE,
+    YOUNGER_DIALOGUE,
+    EXTROVERT_DIALOGUE,
+    INTROVERT_DIALOGUE,
+)
 
 class Person:
-    """
-    Blueprint for all people that we make in our game.
-    """
+    """Blueprint for all people that we make in our game."""
 
     DEFAULT_DIALOGUE = [
         "Hi",
@@ -32,8 +36,17 @@ class Person:
     # methods - describe their behavior
     # constructor - builds a person from their unique attributes
 
-    def __init__(self, name, age, appearance, personality, 
-    origin_position, qty_of_talking=.5, extr_to_intr=0.0):
+    def __init__(
+        self,
+        name,
+        age,
+        appearance,
+        personality,
+        origin_position,
+        qty_of_talking=.5,
+        extr_to_intr=0.0,
+    ):
+        """Create a new person with traits used in the game."""
         self.name = name
         self.age = age
         self.appearance = appearance
@@ -43,14 +56,12 @@ class Person:
         self.extr_to_intr = extr_to_intr
         
     def is_old(self):
+        """Return True if this person is considered old."""
         return self.age >= 35
     
 
     def speak(self, group):
-        """
-        Outputs dialogue for the Person, based on 
-        the Person's group, passed as an argument.
-        """
+        """Output dialogue for the person based on a group label."""
         rand_dialogue_choice = random.choice(Person.DEFAULT_DIALOGUE)
         group_dialogue_chance = random.randint(1,100)
         # selecting based on groups
@@ -59,8 +70,11 @@ class Person:
 
         if group_dialogue_chance <= 50:
             dialogue_choices = Person.DIALOGUE_OPTIONS.get(group.upper())
-            random_group_dialogue = random.choice(dialogue_choices if dialogue_choices is not None else "CTHULU IS ARISEN")
-            print(random_group_dialogue)
+            if dialogue_choices is None:
+                print("I'm not sure what to say...")
+            else:
+                random_group_dialogue = random.choice(dialogue_choices)
+                print(random_group_dialogue)
         else:
             print(rand_dialogue_choice)
             

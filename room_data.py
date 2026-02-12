@@ -1,3 +1,5 @@
+"""Room definitions used by the game."""
+
 from room import Room
 
 kitchen = Room('Kitchen',

@@ -1,3 +1,5 @@
+"""Main entry point and game setup."""
+
 import random
 from person import Person
 from player import Player
@@ -14,19 +16,19 @@ people = [
     Person("Dad", 40, "brunette + beard + hazel eyes", "extroverted", "Living Room"),
     Person("Mom", 38, "black hair + dark blue eyes", "extroverted", "Kitchen"),
     Person("Thomas", 15, "brunette + green eyes", "introverted", "Bedroom"),
-    Person("Quinn", 17, "black hair + grey eyes", "extorverted", "Living Room"),
+    Person("Quinn", 17, "black hair + grey eyes", "extroverted", "Living Room"),
     Person("Eli", 5, "short hair + brown eyes", "extroverted", "Basement"),
     ]
 
 rooms = [kitchen, living_room, basement]
 
-# show the people in the rooms
-# print(room) to do that.
 def print_rooms(room_list):
+    """Print each room and its people."""
     for room in room_list:
         print(room)
         
 def place_people_in_rooms(p=people, r=rooms):
+    """Place each person into their matching room."""
     for person in p:
         for room in r:
             if person.origin_position.lower() == room.name.lower():
@@ -59,6 +61,7 @@ def consquences_of_your_actions(player_action):
 
 
 def speak_with_person(person):
+    """Run a back-and-forth conversation with a person."""
     # person initiates the conversation
     # Flag variable
     conversation_has_failed = False
@@ -165,7 +168,7 @@ def check_for_brainrot(user_message):
             
     return False
 
- def produce_room_event(events):
+def produce_room_event(events):
     """
     This function takes a list of events and using a random percentage
     to get chances of that event happening, we return an event. 
@@ -178,6 +181,7 @@ def check_for_brainrot(user_message):
         pass
 
 def main():
+    """Run the game loop."""
     place_people_in_rooms()
     # calling the print_rooms function with rooms as an argument
 

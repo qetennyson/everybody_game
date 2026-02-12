@@ -3,7 +3,6 @@ from dialogue import OLDER_DIALOGUE, YOUNGER_DIALOGUE, \
 EXTROVERT_DIALOGUE, INTROVERT_DIALOGUE
 
 class Person:
-
     """
     Blueprint for all people that we make in our game.
     """
@@ -15,30 +14,39 @@ class Person:
         "How are you?",
         "How have you been?",
     ]
+    
+    # TODO:
+    # SEPPARATE
+    # GREETING_DIALOGUE
+    # CONCLUDING_DIALOGUE
 
     # dictionary - looks up data w/ key-value pairs
     DIALOGUE_OPTIONS = {
         'OLD' : OLDER_DIALOGUE,
         'YOUNG' : YOUNGER_DIALOGUE,
-        'EXTROVERT' : EXTROVERT_DIALOGUE,
-        'INTROVERT' : INTROVERT_DIALOGUE,
+        'EXTROVERTED' : EXTROVERT_DIALOGUE,
+        'INTROVERTED' : INTROVERT_DIALOGUE,
     }
 
     # attributes - describe their state
     # methods - describe their behavior
     # constructor - builds a person from their unique attributes
 
-    def __init__(self, name, appearance, personality, 
+    def __init__(self, name, age, appearance, personality, 
     origin_position, qty_of_talking=.5, extr_to_intr=0.0):
         self.name = name
+        self.age = age
         self.appearance = appearance
-        self.origin_position = origin_position
         self.personality = personality
+        self.origin_position = origin_position
         self.qty_of_talking = qty_of_talking
         self.extr_to_intr = extr_to_intr
+        
+    def is_old(self):
+        return self.age >= 35
     
 
-    def speak(self, group: str):
+    def speak(self, group):
         """
         Outputs dialogue for the Person, based on 
         the Person's group, passed as an argument.
@@ -51,13 +59,10 @@ class Person:
 
         if group_dialogue_chance <= 50:
             dialogue_choices = Person.DIALOGUE_OPTIONS.get(group.upper())
-            if dialogue_choices:
-                random_group_dialogue = random.choice(dialogue_choices)
-                print(random_group_dialogue)
+            random_group_dialogue = random.choice(dialogue_choices if dialogue_choices is not None else "CTHULU IS ARISEN")
+            print(random_group_dialogue)
         else:
             print(rand_dialogue_choice)
             
     def __repr__(self):
         return f'{self.name.title()}'
-    
-

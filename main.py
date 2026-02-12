@@ -5,6 +5,7 @@ from person import Person
 from player import Player
 from room_data import kitchen, living_room, basement
 
+
 people = [
     Person("Aunt Sherry", 46, "dark hair + black eyes + black purse", "introverted", "Living Room"),
     Person("Cousin Emma", 16, "wears pink + short hair", "extroverted", "Basement"),
@@ -60,7 +61,7 @@ def consquences_of_your_actions(player_action):
     """
 
 
-def speak_with_person(person):
+def speak_with_person(person, player):
     """Run a back-and-forth conversation with a person."""
     # person initiates the conversation
     # Flag variable
@@ -74,13 +75,17 @@ def speak_with_person(person):
     
         response = input("How do you respond?")
         
-    # Check for lenghth - Introvert/Extrovert
-        if len(response) > 50 and (person.personality != 'extrovert'):
+    # Check for length - Introvert/Extrovert (charcter count)
+        if len(response) > 50 and (person.personality != 'extroverted'):
+            print(person.personality)
             conversation_has_failed = True
             print("Yeah, sure, whatever. I don't like talking this much")
+        elif len(response) <= 50 and (person.personality != 'introverted'):
+            conversation_has_failed = True
+            print("Yeah, sure, whatever.  I can see you don't want to talk.")
           
             
-    # Check grammer - Old/Young
+    # Check grammer - Old/Young (grammer)
         if check_for_brainrot(response) == True and person.is_old():
             conversation_has_failed = True
             print("Don't talk to an old person with such confusing language!")
@@ -88,9 +93,11 @@ def speak_with_person(person):
             
     # If checks fail - set statement / decrement "HP?"
         if conversation_has_failed == True:
-            print("Player failed conversation check")
-            return
-            
+            print("They didn't like that response")
+            # decrease player hp
+            player.HP -= 1 
+            # "The player has <HP> left"
+            print("The player has " + str(player.HP) + "HP remaining.")
         else: 
             continue_chance = 50
             if random.randint(1, 100) <= continue_chance:
@@ -98,10 +105,18 @@ def speak_with_person(person):
             else:
                 print("They walked away.")
                 return
-                
+        if is_death(player):
+            print("You DED!!!!!!!☠️☠️☠️☠️☠️☠️")
+            break
     # If they succeed
         # chance for the person to continue talking or leave the conversation
     # longer conversation = higher chance to end
+    
+def is_death(player):
+    if player.HP > 0:
+        return False
+    else:
+        return True
     
 def check_punctuation(user_message):
     """
@@ -138,7 +153,7 @@ def check_for_brainrot(user_message):
     
     """
     BRAIN_ROT_WORDLIST = [
-        "67",  # that is dead
+        "67",  # that is dead #sshh bro 
         "Ballerina caputina",
         "negative rizz",
         "positive rizz",
@@ -158,6 +173,7 @@ def check_for_brainrot(user_message):
         "skibidi",
         "yeet",
         "put the fries in the bag",
+        "idk",
     ]
     
     # return BRAIN_ROT_WORDLIST in user_message
@@ -197,7 +213,7 @@ def main():
     # what happens?
     random_person = random.choice(players_room.get_list_of_people()) #method
     print(random_person)
-    speak_with_person(random_person)
+    speak_with_person(random_person, new_player)
     # handle player choice -Ireland
     # outcomes/events from player choices - Jade
     
